@@ -1,1 +1,36 @@
-hi
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Realtime communication - Node.js</title>
+    <style>
+        body {
+            padding: 20px;
+            direction: ltr;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        socket.on('updateAsk', function (payload) {
+            console.log(payload);
+            var item = document.getElementById(payload["symbol"]);
+            item.innerHTML = payload["symbol"] + " : $" + payload["ask"];
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="header">Symbols</h1>
+        <div class="list">
+            <li id="XBT/USD"> XBT/USD : $</li>
+            <li id="XBT/EUR"> XBT/EUR : $</li>
+            <li id="ADA/USD"> ADA/USD : $</li>
+        </div>
+    </div>
+</body>
+
+</html>
