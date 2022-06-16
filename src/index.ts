@@ -14,6 +14,7 @@ const krakenPublicWebSocketSubscriptionMsg = {
   subscription: { name: 'ticker' },
 };
 const appPort = 8080;
+const token = 'abcd';
 
 try {
   const webSocketClient = new WebSocket(krakenPublicWebSocketURL);
@@ -45,7 +46,27 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/src/client/index.html');
 });
 
-io.on('connection', (socket) => {
+io.use(function (socket, next) {
+  if (
+    socket.handshake?.query?.token &&
+    socket.handshake.query.token === token
+  ) {
+    return next();
+  }
+
+  setTimeout(function () {
+    if (
+      socket.handshake?.query?.token &&
+      socket.handshake.query.token === token
+    ) {
+      return next();
+    }
+    socket.disconnect(true);
+    console.log("auth error");
+    
+  }, 5000);
+
+}).on('connection', (socket) => {
   console.log('a user connected');
   socket.on('disconnect', () => {
     console.log('user disconnected');
