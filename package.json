@@ -11,9 +11,16 @@
   "keywords": [],
   "author": "Mahdi Darabi <mahdidarabi7@yahoo.com>",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
+    "ws": "^8.8.0"
+  },
   "devDependencies": {
     "@types/node": "^17.0.3",
+    "@types/socket.io": "^3.0.2",
+    "@types/socket.io-client": "^3.0.0",
+    "@types/ws": "^8.5.3",
     "nodemon": "^2.0.16",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
